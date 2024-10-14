@@ -1,0 +1,44 @@
+/* Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2d2d2d; /* Dark gray background */
+    color: white;
+    padding: 10px 20px; /* Padding around the navbar */
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-icon {
+    font-size: 30px; /* Size of the user icon */
+    margin-right: 10px; /* Space between icon and user name */
+  }
+  
+  .user-name {
+    font-size: 18px; /* Font size for user name */
+    font-weight: bold; /* Bold user name */
+  }
+  
+  .options {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+  }
+  
+  .option-btn {
+    background-color: transparent; /* Transparent background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 8px 12px; /* Padding for buttons */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .option-btn:hover {
+    background-color: #444; /* Darker background on hover */
+    border-radius: 5px; /* Rounded corners for hover effect */
+  }
+  
