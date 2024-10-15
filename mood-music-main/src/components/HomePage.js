@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import Axios for making HTTP requests
-import { useNavigate } from 'react-router-dom'; // For navigation after login/signup
-import './Home.css'; // Import the CSS file for styling
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './Home.css';
 import backgroundVideo from './videos/background_video.mp4';
 
 const HomePage = () => {
-  const [showForm, setShowForm] = useState(null); // 'login' or 'signup'
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const [showForm, setShowForm] = useState(null);
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate for redirection
+  const [showFeatures, setShowFeatures] = useState(false); // New state for features list
+  const navigate = useNavigate();
 
   const handleFormOpen = (formType) => {
     setShowForm(formType);
-    setMessage(''); // Reset message when opening a form
+    setMessage('');
   };
 
   const handleCloseForm = () => {
     setShowForm(null);
-    setFormData({ email: '', password: '' }); // Reset form data
+    setFormData({ email: '', password: '' });
   };
 
   const handleInputChange = (e) => {
@@ -34,9 +32,9 @@ const HomePage = () => {
         email: formData.email,
         password: formData.password,
       });
-      setMessage(res.data.msg); // Display success message
+      setMessage(res.data.msg);
       if (res.status === 200) {
-        navigate('/main'); // Navigate to main component after successful login
+        navigate('/main');
       }
     } catch (err) {
       setMessage(err.response?.data?.msg || 'Login failed');
@@ -45,20 +43,22 @@ const HomePage = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
     try {
       const res = await axios.post('http://localhost:5000/signup', {
         email: formData.email,
         password: formData.password,
       });
-      setMessage(res.data.msg); // Display success message
+      setMessage(res.data.msg);
       if (res.status === 200) {
-        // Redirect to the login form after successful signup
-        handleFormOpen('login');
+        handleFormOpen('login'); // Show login form after successful signup
       }
     } catch (err) {
       setMessage(err.response?.data?.msg || 'Signup failed');
     }
+  };
+
+  const toggleFeaturesList = () => {
+    setShowFeatures((prev) => !prev); // Toggle the visibility of features
   };
 
   return (
@@ -67,7 +67,7 @@ const HomePage = () => {
       <nav className="navbar">
         <div className="logo">Mood Tunes</div>
         <ul className="nav-links">
-          <li><a href="#features">Features</a></li>
+          <li><button onClick={toggleFeaturesList} className="nav-link">Features</button></li>
           <li><button onClick={() => handleFormOpen('login')} className="nav-link">Login</button></li>
           <li><button onClick={() => handleFormOpen('signup')} className="nav-link">Sign Up</button></li>
         </ul>
@@ -122,6 +122,19 @@ const HomePage = () => {
           </div>
         </div>
       )}
+
+     {/* Features List */}
+{showFeatures && (
+  <div className="features-list">
+    <ul>
+      <li>Mood-Based Song Recommendations</li>
+      <li>Facial Expression Analysis</li>
+      <li>Custom playlists based on your preferences</li>
+      <li>Seamless Spotify Integration</li>
+    </ul>
+  </div>
+)}
+
 
       {/* Footer */}
       <footer className="footer">

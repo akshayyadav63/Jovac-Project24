@@ -244,6 +244,7 @@ body {
 
 /* Form Button */
 .form-btn {
+  display: flex;
   background: #3498db;
   color: white;
   border: none;
@@ -265,4 +266,54 @@ body {
 #l_s{
   color: rgb(40, 120, 241);
   cursor: pointer;
+}
+
+.features-list {
+  background-color: rgba(15, 15, 15, 0.1); /* Light background for contrast */
+  border-radius: 8px;
+  padding: 20px;
+ 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: absolute; /* Positioning the list */
+  bottom: 220px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  z-index: 10; /* Ensure it appears above other elements */
+  max-width: 300px; /* Limit the width */
+}
+
+.features-list h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem; /* Adjust font size */
+  color: #ec1818; /* Dark color for the heading */
+}
+
+.features-list ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+}
+
+.features-list li {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  padding: 10px 0; /* Add spacing between items */
+  border-bottom: 1px solid #ddd; /* Light border for separation */
+  color: whitesmoke; /* Gray color for the text */
+  position: relative; /* Position for checkbox */
+}
+
+.features-list li:last-child {
+  border-bottom: none; /* Remove border from last item */
+}
+
+.features-list li::before {
+  content: '✓'; /* Checkmark icon */
+  color: #4caf50; /* Green color for the checkmark */
+  position: absolute;
+  left: -20px; /* Position the checkmark */
+  font-size: 1.2rem; /* Adjust size */
+}
+
+.features-list li:hover {
+  background-color: rgba(45, 44, 44, 0.5); /* Light hover effect */
+  cursor: pointer; /* Change cursor to pointer */
 }

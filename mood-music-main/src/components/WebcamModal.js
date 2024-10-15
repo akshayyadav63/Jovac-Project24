@@ -1,6 +1,4 @@
-// cSpell:ignore faceapi bgcolor labelledby describedby
-
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Modal, Box } from "@mui/material";
 import * as faceapi from "face-api.js";
 
@@ -23,9 +21,10 @@ function WebcamModal(props) {
   const videoHeight = 480;
   const videoWidth = 640;
   const intervalRef = useRef(null); // Use a ref for the interval
+  const [faceDetected, setFaceDetected] = useState(true); // State for face detection status
 
   useEffect(() => {
-    const videoElement = videoRef.current; // Store ref in a local variable
+    const videoElement = videoRef.current;
 
     if (modelsLoaded) {
       startVideo();
@@ -99,11 +98,17 @@ function WebcamModal(props) {
           faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
           faceapi.draw.drawFaceExpressions(canvasRef.current, resizedDetections);
 
-          detections.forEach((item) => {
-            for (let emotion in emotions) {
-              emotions[emotion] += item.expressions[emotion] / 2;
-            }
-          });
+          // Set face detection status based on detections
+          if (detections.length === 0) {
+            setFaceDetected(false); // No face detected
+          } else {
+            setFaceDetected(true); // Face detected
+            detections.forEach((item) => {
+              for (let emotion in emotions) {
+                emotions[emotion] += item.expressions[emotion] / 2;
+              }
+            });
+          }
         }
         total_frames += 1;
       }
@@ -164,6 +169,11 @@ function WebcamModal(props) {
               <div style={{ color: "white" }}>Loading...</div>
             )}
           </div>
+          {!faceDetected && (
+            <div style={{ color: "red", marginTop: "10px" }}>
+              No face detected. Please adjust your position.
+            </div>
+          )}
         </div>
       </Box>
     </Modal>
