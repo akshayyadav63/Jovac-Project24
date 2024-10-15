@@ -2,9 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // Import CORS
 
 // Create Express app
 const app = express();
+app.use(cors()); // Enable CORS
 app.use(bodyParser.json()); // Middleware to parse JSON data
 
 // Connect to MongoDB using Mongoose
@@ -25,6 +27,8 @@ const User = mongoose.model('User', UserSchema);
 
 // Signup Endpoint
 app.post('/signup', async (req, res) => {
+  console.log('Signup request received:', req.body); // Debugging log
+
   const { email, password } = req.body; // Removed confirmPassword
 
   // Check if user already exists
@@ -45,6 +49,8 @@ app.post('/signup', async (req, res) => {
 
 // Login Endpoint
 app.post('/login', async (req, res) => {
+  console.log('Login request received:', req.body); // Debugging log
+
   const { email, password } = req.body;
 
   // Find the user by email
