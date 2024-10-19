@@ -121,7 +121,7 @@ function MainComponent() {
 
       // Set background color based on mood
       const moodToColor = {
-        Happy: "yellow",
+        Happy: "teal",
         Sad: "blue",
         Surprised: "orange",
         Fearful: "purple",
@@ -214,7 +214,7 @@ function MainComponent() {
     <div style={{ textAlign: "center", backgroundColor: backgroundColor, minHeight: "100vh", overflow: "hidden" }}>
       <h1 style={{ color: "white" }}>Mood Tunes</h1>
 
-      <IconButton onClick={toggleSidebar} style={{ color: "white", position: "absolute", top: "16px", left: "16px", zIndex: 1000 }}>
+      <IconButton onClick={toggleSidebar} style={{ color: "white", position: "absolute", top: "16px", left: "16px", zIndex: 1000}}>
         <MenuIcon />
       </IconButton>
 

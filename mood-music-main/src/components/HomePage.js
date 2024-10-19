@@ -147,7 +147,7 @@ const HomePage = () => {
     
     <div className="footer-section">
       <h3 >Contact Information</h3>
-      <p class="contact" >Email: support@yourmusicapp.com</p>
+      <p class="contact" >Email: yoursupport@gmail.com</p>
       <p class="contact">Phone: +1 (123) 456-7890</p>
     </div>
     
