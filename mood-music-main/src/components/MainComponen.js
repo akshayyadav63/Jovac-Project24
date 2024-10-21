@@ -119,19 +119,6 @@ function MainComponent() {
       setShowLoader(true);
       setShowSongs(true);
 
-      // Set background color based on mood
-      const moodToColor = {
-        Happy: "yellow",
-        Sad: "blue",
-        Surprised: "orange",
-        Fearful: "purple",
-        Angry: "red",
-        Disgusted: "green",
-        Neutral: "grey",
-      };
-
-      setBackgroundColor(moodToColor[mood] || "black");
-
       if (!weather) {
         alert("Detecting weather...");
         return;
@@ -214,31 +201,35 @@ function MainComponent() {
     <div style={{ textAlign: "center", backgroundColor: backgroundColor, minHeight: "100vh", overflow: "hidden" }}>
       <h1 style={{ color: "white" }}>Mood Tunes</h1>
 
-      <IconButton onClick={toggleSidebar} style={{ color: "white", position: "absolute", top: "16px", left: "16px", zIndex: 1000 }}>
-        <MenuIcon />
-      </IconButton>
-
-      <Drawer anchor="left" open={sidebarOpen} onClose={toggleSidebar}>
-        <Box
-          sx={{ width: 250 }}
-          role="presentation"
-          onClick={toggleSidebar}
-          onKeyDown={toggleSidebar}
-        >
-          <UserProfile><img  id="userprofile" width="50px" height="50px"  src="https://cdn.pixabay.com/photo/2019/10/10/18/51/smartphone-4540273_1280.jpg" alt="User"></img> </UserProfile>
-          <List>
-            {["Happy", "Sad", "Surprised", "Fearful", "Angry", "Disgusted", "Neutral"].map((mood) => (
-              <ListItem button key={mood} onClick={() => recommendSongs(mood)}>
-                <ListItemText primary={mood} />
-              </ListItem>
-            ))}
-          <ListItem button onClick={handleLogout}>
-            <ListItemText primary="Logout" />
-          </ListItem>
-          </List>
-          
-        </Box>
-      </Drawer>
+      <div
+        style={{
+          gap: "15px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          marginBottom: "30px",
+        }}
+      >
+        {[
+          { emotion: "Happy", emoji: "😀" },
+          { emotion: "Sad", emoji: "😔" },
+          { emotion: "Surprised", emoji: "😲" },
+          { emotion: "Fearful", emoji: "😨" },
+          { emotion: "Angry", emoji: "😠" },
+          { emotion: "Disgusted", emoji: "🤢" },
+          { emotion: "Neutral", emoji: "😶" },
+        ].map((item) => (
+          <div key={item.emotion}>
+            <Button
+              style={{ fontSize: "40px" }}
+              onClick={() => recommendSongs(item.emotion)}
+            >
+              {item.emoji}
+            </Button>
+            <div style={{ color: "lightblue" }}>{item.emotion}</div>
+          </div>
+        ))}
+      </div>
 
       <Button variant="contained" onClick={() => setWebcamModal(true)} style={{ marginTop: "20px" }}>
         Play my mood!

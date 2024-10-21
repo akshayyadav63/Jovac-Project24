@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -123,25 +124,37 @@ const HomePage = () => {
         </div>
       )}
 
-     {/* Features List */}
-{showFeatures && (
-  <div className="features-list">
-    <ul>
-      <li>Mood-Based Song Recommendations</li>
-      <li>Facial Expression Analysis</li>
-      <li>Custom playlists based on your preferences</li>
-      <li>Seamless Spotify Integration</li>
-    </ul>
-  </div>
-)}
-
-
       {/* Footer */}
       <footer className="footer">
-        <p>© 2024 Mood Tunes. All rights reserved.</p>
-      </footer>
+  <div className="footer-content">
+    <div className="footer-section">
+      <h3>About Us</h3>
+      <p>We are a music application dedicated to providing you with the best tunes tailored to your mood.</p>
+    </div>
+    
+    <div className="footer-section">
+      <h3 >Contact Information</h3>
+      <p class="contact" >Email: yoursupport@gmail.com</p>
+      <p class="contact">Phone: +1 (123) 456-7890</p>
+    </div>
+    
+    <div className="footer-section">
+      <h3>Follow Us</h3>
+      <div className="social-links">
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="Twitter">Twitter</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+      </div>
+    </div>
+  </div>
+  
+  <div className="footer-bottom">
+    <p>&copy; 2024 Your Music App. All rights reserved.</p>
+  </div>
+</footer>
+
     </div>
   );
 };
 
-export default HomePage;
+export default HomePage;  
