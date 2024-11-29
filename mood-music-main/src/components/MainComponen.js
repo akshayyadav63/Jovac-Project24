@@ -143,9 +143,9 @@ function MainComponent() {
       }
 
       const moodToPlaylist = {
-        Happy: "4nNVfQ9eWidZXkBKZN5li4", // Example playlist ID for Bollywood
-        Sad: "37i9dQZF1DXdFesNN9TzXT", // Example playlist ID for Hindi Sad Songs
-        Surprised: "37i9dQZF1DX0XUfTFmNBRM", // Example playlist ID for Hindi Surprise Mood
+        Happy: "37i9dQZF1DX4JpX3YFf9p6", // Example playlist ID for Bollywood
+        Sad: "37i9dQZF1DX8jZZ0V3XdbV", // Example playlist ID for Hindi Sad Songs
+        Surprised: "37i9dQZF1DWVByR5gmXs4Q", // Example playlist ID for Hindi Surprise Mood
         Fearful: "08eWe5qrfPRCH4V7P69KRs", // Example playlist ID for Hindi Fearful Mood
         Angry: "3JNWpteYvH3ynMcyPcvxfx", // Example playlist ID for Hindi Angry Mood
         Disgusted: "0EDTgQrMbfS7RGToucSGoK", // Example playlist ID for Hindi Disgust Mood
