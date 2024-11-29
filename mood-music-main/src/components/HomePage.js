@@ -124,6 +124,19 @@ const HomePage = () => {
         </div>
       )}
 
+      {/* Features List */}
+      {showFeatures && (
+        <div className="features-list">
+          <ul>
+            <li>Mood-Based Song Recommendations</li>
+            <li>Facial Expression Analysis</li>
+            <li>Custom playlists based on your preferences</li>
+            <li>Seamless Spotify Integration</li>
+            {/* Add more features as needed */}
+          </ul>
+        </div>
+      )}
+
       {/* Footer */}
       <footer className="footer">
   <div className="footer-content">

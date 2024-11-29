@@ -1,11 +1,11 @@
 import axios from "axios";
 import SongCard from "./SongCard";
 import * as faceapi from "face-api.js";
-import WebcamModal from "./WebcamModal"; 
+import WebcamModal from "./WebcamModal";
 import { Bars } from "react-loader-spinner";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import './MainComponent.css'
+import "./MainComponent.css";
 import React, { useState, useEffect, useCallback } from "react";
 import {
   Button,
@@ -18,7 +18,7 @@ import {
   ListItemText,
   IconButton,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu"; // Importing Menu icon
+import MenuIcon from "@mui/icons-material/Menu";
 
 var geolocation = require("geolocation");
 
@@ -39,7 +39,6 @@ const UserProfile = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   marginBottom: "16px",
 }));
-
 
 function MainComponent() {
   const [loader, setShowLoader] = useState(false);
@@ -119,6 +118,18 @@ function MainComponent() {
       setShowLoader(true);
       setShowSongs(true);
 
+      const moodToColor = {
+        Happy: "teal",
+        Sad: "blue",
+        Surprised: "orange",
+        Fearful: "purple",
+        Angry: "red",
+        Disgusted: "green",
+        Neutral: "grey",
+      };
+
+      setBackgroundColor(moodToColor[mood] || "black");
+
       if (!weather) {
         alert("Detecting weather...");
         return;
@@ -130,13 +141,13 @@ function MainComponent() {
       }
 
       const moodToPlaylist = {
-        Happy: "4nNVfQ9eWidZXkBKZN5li4", // Example playlist ID for Bollywood
-        Sad: "37i9dQZF1DXdFesNN9TzXT", // Example playlist ID for Hindi Sad Songs
-        Surprised: "37i9dQZF1DX0XUfTFmNBRM", // Example playlist ID for Hindi Surprise Mood
-        Fearful: "08eWe5qrfPRCH4V7P69KRs", // Example playlist ID for Hindi Fearful Mood
-        Angry: "3JNWpteYvH3ynMcyPcvxfx", // Example playlist ID for Hindi Angry Mood
-        Disgusted: "0EDTgQrMbfS7RGToucSGoK", // Example playlist ID for Hindi Disgust Mood
-        Neutral: "1b6Lj2j6z1cUg2WWsuGGk0", // Example playlist ID for Hindi Neutral Mood
+        Happy: "37i9dQZF1DX4JpX3YFf9p6",
+        Sad: "37i9dQZF1DX8jZZ0V3XdbV",
+        Surprised: "37i9dQZF1DWVByR5gmXs4Q",
+        Fearful: "08eWe5qrfPRCH4V7P69KRs",
+        Angry: "3JNWpteYvH3ynMcyPcvxfx",
+        Disgusted: "0EDTgQrMbfS7RGToucSGoK",
+        Neutral: "1b6Lj2j6z1cUg2WWsuGGk0",
       };
 
       const playlistId = moodToPlaylist[mood];
@@ -175,7 +186,7 @@ function MainComponent() {
 
   const handleSongPlay = (previewUrl) => {
     if (currentAudio) {
-      currentAudio.pause(); // Pause the currently playing song
+      currentAudio.pause();
     }
 
     const audio = new Audio(previewUrl);
@@ -188,50 +199,79 @@ function MainComponent() {
   };
 
   const handleLogout = () => {
-    // Clear any tokens or relevant state
     setAccessToken("");
     setEmotion(null);
     setSongs([]);
     setShowSongs(false);
-    // Redirect to the front page
-    navigate("/"); // Change to the path of your front page
+    navigate("/");
   };
 
   return (
-    <div style={{ textAlign: "center", backgroundColor: backgroundColor, minHeight: "100vh", overflow: "hidden" }}>
+    <div
+      style={{
+        textAlign: "center",
+        backgroundColor: backgroundColor,
+        minHeight: "100vh",
+        overflow: "hidden",
+      }}
+    >
       <h1 style={{ color: "white" }}>Mood Tunes</h1>
 
-      <div
+      <IconButton
+        onClick={toggleSidebar}
         style={{
-          gap: "15px",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          marginBottom: "30px",
+          color: "white",
+          position: "absolute",
+          top: "16px",
+          left: "16px",
+          zIndex: 1000,
         }}
       >
-        {[
-          { emotion: "Happy", emoji: "😀" },
-          { emotion: "Sad", emoji: "😔" },
-          { emotion: "Surprised", emoji: "😲" },
-          { emotion: "Fearful", emoji: "😨" },
-          { emotion: "Angry", emoji: "😠" },
-          { emotion: "Disgusted", emoji: "🤢" },
-          { emotion: "Neutral", emoji: "😶" },
-        ].map((item) => (
-          <div key={item.emotion}>
-            <Button
-              style={{ fontSize: "40px" }}
-              onClick={() => recommendSongs(item.emotion)}
-            >
-              {item.emoji}
-            </Button>
-            <div style={{ color: "lightblue" }}>{item.emotion}</div>
-          </div>
-        ))}
-      </div>
+        <MenuIcon />
+      </IconButton>
 
-      <Button variant="contained" onClick={() => setWebcamModal(true)} style={{ marginTop: "20px" }}>
+      <Drawer anchor="left" open={sidebarOpen} onClose={toggleSidebar}>
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={toggleSidebar}
+          onKeyDown={toggleSidebar}
+        >
+          <UserProfile>
+            <img
+              id="userimage"
+              width="60px"
+              height="60px"
+              src="https://cdn.pixabay.com/photo/2019/10/10/18/51/smartphone-4540273_1280.jpg"
+              alt="User"
+            />
+          </UserProfile>
+          <List>
+            {[
+              "Happy",
+              "Sad",
+              "Surprised",
+              "Fearful",
+              "Angry",
+              "Disgusted",
+              "Neutral",
+            ].map((mood) => (
+              <ListItem button key={mood} onClick={() => recommendSongs(mood)}>
+                <ListItemText primary={mood} />
+              </ListItem>
+            ))}
+            <ListItem button onClick={handleLogout}>
+              <ListItemText primary="Logout" />
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
+
+      <Button
+        variant="contained"
+        onClick={() => setWebcamModal(true)}
+        style={{ marginTop: "20px" }}
+      >
         Play my mood!
       </Button>
 
@@ -253,30 +293,24 @@ function MainComponent() {
               display: "flex",
               flexDirection: "row",
               justifyContent: "center",
-              alignItems: "center",
-              height: "100px",
             }}
           >
-            <Bars color="white" />
+            <Bars color="#ffffff" />
           </div>
-        ) : (
-          <Grid container spacing={2} style={{ padding: "20px" }}>
+        ) : showSongs ? (
+          <Grid container spacing={2} columns={10}>
             {songs.map((song) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={song.id}>
+              <Grid item xs={2} sm={4} md={4} key={song.id}>
                 <Item>
-                  <SongCard
-                    song={song}
-                    onPlay={() => handleSongPlay(song.preview_url)}
-                  />
+                  <SongCard song={song} handleSongPlay={handleSongPlay} />
                 </Item>
               </Grid>
             ))}
           </Grid>
-        )}
+        ) : null}
       </div>
     </div>
   );
 }
 
 export default MainComponent;
-
