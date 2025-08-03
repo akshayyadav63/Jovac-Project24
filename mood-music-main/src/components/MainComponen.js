@@ -141,14 +141,15 @@ function MainComponent() {
       }
 
       const moodToPlaylist = {
-        Happy: "37i9dQZF1DX4JpX3YFf9p6",
-        Sad: "37i9dQZF1DX8jZZ0V3XdbV",
-        Surprised: "37i9dQZF1DWVByR5gmXs4Q",
-        Fearful: "08eWe5qrfPRCH4V7P69KRs",
-        Angry: "3JNWpteYvH3ynMcyPcvxfx",
-        Disgusted: "0EDTgQrMbfS7RGToucSGoK",
-        Neutral: "1b6Lj2j6z1cUg2WWsuGGk0",
-      };
+  Happy: "37i9dQZF1DXdPec7aLTmlC",       // Happy Hits!
+  Sad: "37i9dQZF1DX7qK8ma5wgG1",         // Life Sucks
+  Surprised: "37i9dQZF1DX4SBhb3fqCJd",   // All New Indie
+  Fearful: "37i9dQZF1DX4sWSpwq3LiO",     // Deep Focus (calm fearful)
+  Angry: "37i9dQZF1DWX83CujKHHOn",       // Rock Hard
+  Disgusted: "37i9dQZF1DX3Y1kl3fw8rY",   // Grunge Forever
+  Neutral: "37i9dQZF1DWUzFXarNiofw",     // Chill Vibes
+};
+
 
       const playlistId = moodToPlaylist[mood];
 
