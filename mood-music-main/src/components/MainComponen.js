@@ -88,8 +88,8 @@ function MainComponent() {
     }
 
     const fetchAccessToken = async () => {
-      const clientId = "39798627b39140e48b95e681d88151c4";
-      const clientSecret = "e876cc99129448b8adda0b371473069a";
+      const clientId = "75c62d2e0748471c97b58185afe28911";
+      const clientSecret = "fd9ba41e371842cf9d58889c1d83bc07";
 
       const tokenUrl = "https://accounts.spotify.com/api/token";
       const body = new URLSearchParams({
