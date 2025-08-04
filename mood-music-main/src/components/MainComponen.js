@@ -258,7 +258,7 @@ function MainComponent() {
       },
       headers: {
         "X-RapidAPI-Host": "shazam.p.rapidapi.com",
-        "X-RapidAPI-Key": "8d3ac4e99amsh83e676e8606f6b1p113464jsn4fd24938288e",
+        "X-RapidAPI-Key": process.env.REACT_APP_MUSIC_API_KEY,
       },
     };
 
@@ -328,7 +328,7 @@ function MainComponent() {
       },
       headers: {
         "X-RapidAPI-Host": "shazam.p.rapidapi.com",
-        "X-RapidAPI-Key": "8d3ac4e99amsh83e676e8606f6b1p113464jsn4fd24938288e",
+        "X-RapidAPI-Key":process.env.REACT_APP_MUSIC_API_KEY,
       },
     };
 
